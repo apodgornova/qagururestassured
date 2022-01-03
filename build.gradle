@@ -1,24 +1,38 @@
 plugins {
     id 'java-library'
+    id 'io.qameta.allure' version '2.8.1'
 }
 
 repositories {
     mavenCentral()
 }
 
-def junitVersion = "5.8.2"
+def junitVersion = "5.8.1",
+    allureVersion = "2.16.1"
+
+allure {
+    version = allureVersion
+    autoconfigure = true
+    aspectjweaver = true
+    configuration = "testImplementation"
+    useJUnit5 {
+        version = allureVersion
+    }
+}
 
 dependencies {
     testImplementation(
             "io.rest-assured:rest-assured:4.4.0",
             "org.assertj:assertj-core:3.21.0",
             "org.json:json:20211205",
-            "io.qameta.allure:allure-selenide:2.14.0",
+            "io.qameta.allure:allure-rest-assured:$allureVersion",
             "com.codeborne:selenide:5.24.0",
             "org.junit.jupiter:junit-jupiter-api:$junitVersion")
 
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
 }
+
+
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'

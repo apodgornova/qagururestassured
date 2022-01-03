@@ -1,3 +1,5 @@
+package tests;
+
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -7,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
+import static filters.CustomLogFilter.customLogFilter;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -39,6 +42,7 @@ public class ReqresInTests {
         */
 
         Response response = given()
+                .filter(customLogFilter().withCustomTemplates())
                 .when()
                 .get("api/users/2")
                 .then()
@@ -62,6 +66,7 @@ public class ReqresInTests {
         */
 
         Response response = given()
+                .filter(customLogFilter().withCustomTemplates())
                 .when()
                 .get("api/users/23")
                 .then()
@@ -98,6 +103,7 @@ public class ReqresInTests {
 
 
         Response response = given()
+                .filter(customLogFilter().withCustomTemplates())
                 .body(requestBody.toString())
                 .when()
                 .post("api/users")
@@ -133,6 +139,7 @@ public class ReqresInTests {
                 .put("job", "updatedJob");
 
         Response response = given()
+                .filter(customLogFilter().withCustomTemplates())
                 .body(requestBody.toString())
                 .when()
                 .put("api/users/2")
@@ -155,6 +162,7 @@ public class ReqresInTests {
         */
 
         Response response = given()
+                .filter(customLogFilter().withCustomTemplates())
                 .when()
                 .delete("api/users/2")
                 .then()

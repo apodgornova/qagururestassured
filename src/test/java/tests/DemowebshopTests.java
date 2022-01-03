@@ -1,3 +1,5 @@
+package tests;
+
 import com.codeborne.selenide.Configuration;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeAll;
@@ -8,6 +10,7 @@ import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
+import static filters.CustomLogFilter.customLogFilter;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.core.Is.is;
@@ -25,6 +28,7 @@ public class DemowebshopTests {
         step("Get cookie by api and set it to browser", () -> {
             String authorizationCookie =
                     given()
+                            .filter(customLogFilter().withCustomTemplates())
                             .contentType("application/x-www-form-urlencoded; charset=UTF-8")
                             .formParam("Email", "nastya1@testemail.com")
                             .formParam("Password", "Testpass123")
@@ -66,6 +70,7 @@ public class DemowebshopTests {
 
         step("Add product to wishlist", () -> {
             given()
+                    .filter(customLogFilter().withCustomTemplates())
                     .contentType("application/x-www-form-urlencoded; charset=UTF-8")
                     .body(body)
                     .when()
