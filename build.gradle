@@ -25,6 +25,7 @@ dependencies {
             "io.rest-assured:rest-assured:4.4.0",
             "org.assertj:assertj-core:3.21.0",
             "org.json:json:20211205",
+            "io.qameta.allure:allure-selenide:$allureVersion",
             "io.qameta.allure:allure-rest-assured:$allureVersion",
             "com.codeborne:selenide:5.24.0",
             "org.junit.jupiter:junit-jupiter-api:$junitVersion")
