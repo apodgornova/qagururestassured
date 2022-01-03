@@ -13,7 +13,6 @@ import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static filters.CustomLogFilter.customLogFilter;
 import static io.qameta.allure.Allure.step;
-import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.core.Is.is;
 
@@ -23,6 +22,7 @@ public class ListenerAndFilterTests {
     static void setUp() {
         RestAssured.baseURI = "http://demowebshop.tricentis.com";
         Configuration.baseUrl = "http://demowebshop.tricentis.com";
+        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub/";
     }
 
     @Test
@@ -42,8 +42,7 @@ public class ListenerAndFilterTests {
                             .cookie("NOPCOMMERCE.AUTH");
 
             step("Open minimal content, because cookie can be set when site is opened", () ->
-                    //open("/Themes/DefaultClean/Content/images/logo.png"));
-                    open(baseURI));
+                    open("/Themes/DefaultClean/Content/images/logo.png"));
 
             step("Set cookie to to browser", () ->
                     getWebDriver().manage().addCookie(
