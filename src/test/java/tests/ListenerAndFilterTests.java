@@ -21,7 +21,7 @@ public class ListenerAndFilterTests{
     @BeforeAll
     static void setUp() {
         RestAssured.baseURI = "http://demowebshop.tricentis.com";
-        Configuration.baseUrl = "http://demowebshop.tricentis.com";
+        Configuration.baseUrl = "http://demowebshop.tricentis.com/";
     }
 
     @Test
