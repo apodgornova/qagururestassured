@@ -16,7 +16,7 @@ import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.core.Is.is;
 
-public class ListenerAndFilterTests extends TestBase{
+public class ListenerAndFilterTests{
 
     @BeforeAll
     static void setUp() {
@@ -47,9 +47,6 @@ public class ListenerAndFilterTests extends TestBase{
                     getWebDriver().manage().addCookie(
                             new Cookie("NOPCOMMERCE.AUTH", authorizationCookie)));
         });
-
-        step("Open main page", () ->
-                open(""));
 
         step("Open profile page", () ->
                 open("/customer/info"));
