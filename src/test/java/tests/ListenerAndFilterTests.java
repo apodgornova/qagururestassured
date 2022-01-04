@@ -69,7 +69,7 @@ public class ListenerAndFilterTests {
 
         step("Add product to wishlist", () -> {
             given()
-                    .filter(customLogFilter().withCustomTemplates())
+                    .filter(new AllureRestAssured())
                     .contentType("application/x-www-form-urlencoded; charset=UTF-8")
                     .body(body)
                     .when()

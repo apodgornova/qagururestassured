@@ -1,6 +1,7 @@
 package tests;
 
 import com.codeborne.selenide.Configuration;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -29,7 +30,7 @@ public class DemowebshopTests {
         step("Get cookie by api and set it to browser", () -> {
             String authorizationCookie =
                     given()
-                            .filter(customLogFilter().withCustomTemplates())
+                            .filter(new AllureRestAssured())
                             .contentType("application/x-www-form-urlencoded; charset=UTF-8")
                             .formParam("Email", "nastya1@testemail.com")
                             .formParam("Password", "Testpass123")
@@ -68,7 +69,7 @@ public class DemowebshopTests {
 
         step("Add product to wishlist", () -> {
             given()
-                    .filter(customLogFilter().withCustomTemplates())
+                    .filter(new AllureRestAssured())
                     .contentType("application/x-www-form-urlencoded; charset=UTF-8")
                     .body(body)
                     .when()

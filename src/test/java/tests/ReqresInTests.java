@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -19,8 +20,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class ReqresInTests {
     @BeforeAll
     static void setUp() {
-        RestAssured.baseURI = "https://reqres.in/";
+        RestAssured.baseURI = "https://reqres.in";
     }
+
 
     @Test
     void singleUserMethodOkTest() {
@@ -42,9 +44,9 @@ public class ReqresInTests {
         */
 
         Response response = given()
-                .filter(customLogFilter().withCustomTemplates())
+                .filter(new AllureRestAssured())
                 .when()
-                .get("api/users/2")
+                .get("/api/users/2")
                 .then()
                 .statusCode(200)
                 .contentType(ContentType.JSON)
@@ -66,9 +68,9 @@ public class ReqresInTests {
         */
 
         Response response = given()
-                .filter(customLogFilter().withCustomTemplates())
+                .filter(new AllureRestAssured())
                 .when()
-                .get("api/users/23")
+                .get("/api/users/23")
                 .then()
                 .statusCode(404)
                 .contentType(ContentType.JSON)
@@ -103,10 +105,10 @@ public class ReqresInTests {
 
 
         Response response = given()
-                .filter(customLogFilter().withCustomTemplates())
+                .filter(new AllureRestAssured())
                 .body(requestBody.toString())
                 .when()
-                .post("api/users")
+                .post("/api/users")
                 .then()
                 .statusCode(201)
                 .extract()
@@ -139,10 +141,10 @@ public class ReqresInTests {
                 .put("job", "updatedJob");
 
         Response response = given()
-                .filter(customLogFilter().withCustomTemplates())
+                .filter(new AllureRestAssured())
                 .body(requestBody.toString())
                 .when()
-                .put("api/users/2")
+                .put("/api/users/2")
                 .then()
                 .statusCode(200)
                 .extract()
@@ -162,9 +164,9 @@ public class ReqresInTests {
         */
 
         Response response = given()
-                .filter(customLogFilter().withCustomTemplates())
+                .filter(new AllureRestAssured())
                 .when()
-                .delete("api/users/2")
+                .delete("/api/users/2")
                 .then()
                 .statusCode(204)
                 .extract()
