@@ -8,6 +8,7 @@ repositories {
 }
 
 def junitVersion = "5.8.1",
+    selenideVersion = "5.24.0",
     allureVersion = "2.16.1"
 
 allure {
@@ -22,22 +23,22 @@ allure {
 
 dependencies {
     testImplementation(
-            "io.rest-assured:rest-assured:4.4.0",
-            "org.assertj:assertj-core:3.21.0",
-            "org.json:json:20211205",
-            "io.qameta.allure:allure-selenide:$allureVersion",
+            "io.rest-assured:rest-assured:4.3.1",
+            "io.rest-assured:json-schema-validator:4.3.1",
             "io.qameta.allure:allure-rest-assured:$allureVersion",
-            "com.codeborne:selenide:5.24.0",
+            "com.codeborne:selenide:$selenideVersion",
+            "org.assertj:assertj-core:3.19.0",
+            "org.json:json:20211205",
             "org.junit.jupiter:junit-jupiter-api:$junitVersion")
-
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
 }
 
-
-
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
+
 
 tasks.withType(Test) {
     systemProperties(System.getProperties())
